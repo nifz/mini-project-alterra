@@ -15,6 +15,7 @@ jobs:
           script: |
             cd mini-project-alterra
             git pull origin main
+            go install github.com/swaggo/swag/cmd/swag@latest
             export PATH=$(go env GOPATH)/bin:$PATH
             swag init
             go test -v ./..
