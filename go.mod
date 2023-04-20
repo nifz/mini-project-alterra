@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/cloudinary/cloudinary-go v1.7.0
 	github.com/go-playground/validator/v10 v10.12.0
+	github.com/golang-jwt/jwt/v5 v5.0.0
 	gorm.io/gorm v1.25.0
 )
 
