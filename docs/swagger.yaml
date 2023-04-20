@@ -81,7 +81,7 @@ definitions:
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
-host: ec2-13-236-153-227.ap-southeast-2.compute.amazonaws.com:8083
+host: ec2-13-55-202-99.ap-southeast-2.compute.amazonaws.com:8083
 info:
   contact:
     email: ochammadhanif@gmail.com
