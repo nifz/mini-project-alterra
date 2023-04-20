@@ -22,7 +22,7 @@ import (
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host      ec2-13-236-153-227.ap-southeast-2.compute.amazonaws.com:8083
+// @host      ec2-13-55-202-99.ap-southeast-2.compute.amazonaws.com:8083
 // @BasePath  /
 
 // @securityDefinitions.apikey BearerAuth

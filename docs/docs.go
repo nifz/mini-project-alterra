@@ -1094,7 +1094,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "127.0.0.1:8082",
+	Host:             "ec2-13-236-153-227.ap-southeast-2.compute.amazonaws.com:8083",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Pixelfeed API Documentation",
