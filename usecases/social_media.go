@@ -23,8 +23,8 @@ func NewSocialMediaUsecase(repository repositories.SocialMediaRepository) *socia
 }
 
 // GetMySocialMediaByID godoc
-// @Summary      Get my social media
-// @Description  Get my social media
+// @Summary      Get my social media by id
+// @Description  Get my social media by id
 // @Tags         Social Media
 // @Accept       json
 // @Produce      json
@@ -41,8 +41,8 @@ func (s *socialMediaUsecase) GetMySocialMediaByID(userId, ID int) (models.Social
 }
 
 // GetMySocialMedia godoc
-// @Summary      Get my social media by id
-// @Description  Get my social media by id
+// @Summary      Get my social media
+// @Description  Get my social media
 // @Tags         Social Media
 // @Accept       json
 // @Produce      json

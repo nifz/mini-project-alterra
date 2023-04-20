@@ -101,8 +101,8 @@ func (s *userUsecase) Register(input models.RegisterInput) (models.User, error) 
 }
 
 // GetCredential godoc
-// @Summary      Get user credentials
-// @Description  User credentials
+// @Summary      Get user information
+// @Description  Get user information
 // @Tags         User
 // @Accept       json
 // @Produce      json
