@@ -15,5 +15,6 @@ jobs:
           script: |
             cd mini-project-alterra
             git pull origin main
+            export PATH=$(go env GOPATH)/bin:$PATH
             go test -v ./..
             docker-compose down && docker-compose up --build -d
