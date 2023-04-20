@@ -22,7 +22,7 @@ import (
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host      127.0.0.1:8082
+// @host      ec2-13-236-153-227.ap-southeast-2.compute.amazonaws.com:8083
 // @BasePath  /
 
 // @securityDefinitions.apikey BearerAuth
@@ -46,5 +46,5 @@ func main() {
 	e := echo.New()
 	routes.New(e, db)
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
-	e.Logger.Fatal(e.Start(":8082"))
+	e.Logger.Fatal(e.Start(":8083"))
 }
