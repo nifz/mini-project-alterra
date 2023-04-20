@@ -1,4 +1,701 @@
+basePath: /
+definitions:
+  models.ExampleCommentInput:
+    properties:
+      message:
+        example: Wah keren!
+        type: string
+      photos_id:
+        type: integer
+    type: object
+  models.LoginInput:
+    properties:
+      email:
+        example: me@hanifz.com
+        type: string
+      password:
+        example: qweqwe123
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.PhotoResponseWithoutPhotoURL:
+    properties:
+      caption:
+        example: Liburan ke bali
+        type: string
+      title:
+        example: Bali
+        type: string
+    type: object
+  models.RegisterInput:
+    properties:
+      email:
+        example: me@hanifz.com
+        type: string
+      full_name:
+        example: mochammad hanif
+        minLength: 3
+        type: string
+      password:
+        example: qweqwe123
+        minLength: 6
+        type: string
+      username:
+        example: hanif
+        type: string
+    required:
+    - email
+    - full_name
+    - password
+    - username
+    type: object
+  models.SocialMediaInput:
+    properties:
+      name:
+        example: github
+        type: string
+      social_media_url:
+        example: https://github.com/nifz
+        type: string
+    required:
+    - name
+    - social_media_url
+    type: object
+  models.SocialMediaUpdateInput:
+    properties:
+      name:
+        example: linkedin
+        type: string
+      social_media_url:
+        example: https://linkedin.com/in/hanifz
+        type: string
+    type: object
+  models.UpdateCommentInput:
+    properties:
+      message:
+        example: Nice picture!
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: 127.0.0.1:8082
 info:
-  contact: {}
-paths: {}
+  contact:
+    email: ochammadhanif@gmail.com
+    name: Mochammad Hanif
+    url: http://www.github.com/nifz
+  description: Pixelfeed dibuat untuk memberikan pengguna sebuah platform media sosial
+    yang mudah digunakan dan intuitif, yang memungkinkan mereka untuk berbagi foto
+    mereka dengan orang lain dan untuk mendapatkan umpan balik/komentar dari pengguna
+    lain. Secara keseluruhan, Pixelfeed merupakan sebuah proyek yang dibuat dengan
+    tujuan untuk memberikan sebuah platform media sosial yang mudah digunakan, aman,
+    dan nyaman bagi pengguna untuk berbagi pengalaman mereka melalui foto dan untuk
+    terhubung dengan pengguna lainnya.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Pixelfeed API Documentation
+  version: "1.0"
+paths:
+  /comment:
+    get:
+      consumes:
+      - application/json
+      description: Get my comment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my comment
+      tags:
+      - Comment
+  /comment/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get my comment by id
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my comment by id
+      tags:
+      - Comment
+  /comments:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get all comments
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: Post comment
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ExampleCommentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Post comment
+      tags:
+      - Comment
+  /comments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete comment
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Delete comment
+      tags:
+      - Comment
+    patch:
+      consumes:
+      - application/json
+      description: Update comment
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateCommentInput'
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Update comment
+      tags:
+      - Comment
+  /photo:
+    get:
+      consumes:
+      - application/json
+      description: Get my photo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my photo
+      tags:
+      - Photo
+  /photo/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get my photo by id
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my photo by id
+      tags:
+      - Photo
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: Get all photos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get all photos
+      tags:
+      - Photo
+    post:
+      consumes:
+      - multipart/form-data
+      description: Create photo
+      parameters:
+      - description: Photo file
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Photo title
+        in: formData
+        name: title
+        type: string
+      - description: Photo caption
+        in: formData
+        name: caption
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Create photo
+      tags:
+      - Photo
+  /photos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete photo
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Delete photo
+      tags:
+      - Photo
+    patch:
+      consumes:
+      - application/json
+      description: Update photo
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.PhotoResponseWithoutPhotoURL'
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Update photo
+      tags:
+      - Photo
+  /socialmedia:
+    get:
+      consumes:
+      - application/json
+      description: Get my social media by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my social media by id
+      tags:
+      - Social Media
+  /socialmedia/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get my social media
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get my social media
+      tags:
+      - Social Media
+  /socialmedias:
+    get:
+      consumes:
+      - application/json
+      description: Get all social media
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get all social media
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      description: Create social media
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMediaInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Create social media
+      tags:
+      - Social Media
+  /socialmedias/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete social media
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Delete social media
+      tags:
+      - Social Media
+    patch:
+      consumes:
+      - application/json
+      description: Update social media
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMediaUpdateInput'
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Update social media
+      tags:
+      - Social Media
+  /users:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Delete user
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: User credentials
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Get user credentials
+      tags:
+      - User
+    patch:
+      consumes:
+      - application/json
+      description: Update user
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - BearerAuth: []
+      summary: Update user
+      tags:
+      - User
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Login an account
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Login account
+      tags:
+      - User
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Register an account
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Register account
+      tags:
+      - User
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
