@@ -1,0 +1,18 @@
+version: "3"
+services:
+  app:
+    build: .
+    restart: on-failure
+    environment:
+      - DB_HOST=
+      - DB_USER=
+      - DB_PASSWORD=
+      - DB_DBNAME=
+      - DB_PORT=3306
+      - SECRET_JWT=
+      - CLOUDINARY_CLOUD_NAME=
+      - CLOUDINARY_API_KEY=
+      - CLOUDINARY_API_SECRET=
+      - CLOUDINARY_UPLOAD_FOLDER=go-cloudinary
+    ports:
+      - 8082:8082
