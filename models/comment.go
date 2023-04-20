@@ -21,6 +21,11 @@ type CommentInput struct {
 	UserID  uint   `json:"users_id"`
 }
 
+type ExampleCommentInput struct {
+	PhotoID uint   `json:"photos_id"`
+	Message string `json:"message" example:"Wah keren!"`
+}
+
 type UpdateCommentInput struct {
 	Message string `json:"message" example:"Nice picture!"`
 }
