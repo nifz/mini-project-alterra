@@ -4,7 +4,7 @@ services:
     build: .
     restart: on-failure
     environment:
-      - DB_HOST=https://alta-miniproject.cpqktprvxzrp.ap-southeast-2.rds.amazonaws.com
+      - DB_HOST=alta-miniproject.cpqktprvxzrp.ap-southeast-2.rds.amazonaws.com
       - DB_USER=admin
       - DB_PASSWORD=qweqwe123
       - DB_DBNAME=alta_miniproject
