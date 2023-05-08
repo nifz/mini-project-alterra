@@ -39,7 +39,7 @@ func (r *socialMediaRepository) GetMySocialMedia(userId int) ([]models.SocialMed
 
 func (r *socialMediaRepository) GetSocialMedias(userId int) ([]models.SocialMedia, error) {
 	var socialMedia []models.SocialMedia
-	err := r.DB.Unscoped().Joins("User").Where("user.deleted_at IS NULL").Where("social_media.deleted_at IS NULL").Find(&socialMedia).Error
+	err := r.DB.Joins("JOIN users ON users.id = social_media.user_id").Where("social_media.deleted_at IS NULL AND users.deleted_at IS NULL").Preload("User").Find(&socialMedia).Error
 	return socialMedia, err
 }
 

@@ -65,9 +65,7 @@ func (cr *commentRepository) GetMyComment(userId int) ([]models.Comment, error) 
 
 func (cr *commentRepository) GetAllComments() ([]models.Comment, error) {
 	var comments []models.Comment
-
-	err := cr.DB.Unscoped().Joins("User").Where("user.deleted_at IS NULL").Preload("Photo").Find(&comments).Error
-
+	err := cr.DB.Joins("JOIN users ON users.id = comments.user_id").Where("comments.deleted_at IS NULL AND users.deleted_at IS NULL").Preload("User").Preload("Photo").Find(&comments).Error
 	return comments, err
 }
 
