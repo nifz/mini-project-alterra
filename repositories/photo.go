@@ -62,7 +62,7 @@ func (pr *photoRepository) GetAllMyPhoto(userId int) ([]models.Photo, error) {
 func (pr *photoRepository) GetAllPhoto() ([]models.Photo, error) {
 	var photos []models.Photo
 
-	err := pr.DB.Unscoped().Joins("User").Where("user.deleted_at IS NOT NULL").Find(&photos).Error
+	err := pr.DB.Unscoped().Joins("User").Where("user.deleted_at IS NULL").Where("photos.deleted_at IS NULL").Find(&photos).Error
 
 	return photos, err
 }
