@@ -72,20 +72,13 @@ func (pc *PhotoController) CreatePhoto(c echo.Context) error {
 				})
 		}
 
-		buff := make([]byte, 512)
-		_, err = formFile.Read(buff)
-		if err != nil {
-			return c.JSON(http.StatusInternalServerError, echo.Map{
-				"message": "Failed to read file",
-			})
-		}
+		var re = regexp.MustCompile(`.png|.jpeg|.jpg`)
 
-		defer formFile.Close()
-		filetype := http.DetectContentType(buff)
-		if filetype != "image/jpeg" && filetype != "image/png" {
-			return c.JSON(http.StatusBadRequest, echo.Map{
-				"message": "The provided file format is not allowed. Please upload a JPEG or PNG image",
-			})
+		if !re.MatchString(formHeader.Filename) {
+			return c.JSON(
+				http.StatusBadRequest, echo.Map{
+					"message": "The provided file format is not allowed. Please upload a JPEG or PNG image",
+				})
 		}
 
 		uploadUrl, err := usecases.NewMediaUpload().FileUpload(models.File{File: formFile})
