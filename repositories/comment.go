@@ -75,7 +75,7 @@ func (cr *commentRepository) DeleteCommentRepository(comment models.Comment) err
 }
 
 func (cr *commentRepository) UpdateComment(comment models.Comment) (models.Comment, error) {
-	err := cr.DB.Session(&gorm.Session{FullSaveAssociations: true}).Updates(&comment).Error
+	err := cr.DB.Session(&gorm.Session{FullSaveAssociations: true}).Preload("User").Preload("Photo").Updates(&comment).Error
 
 	return comment, err
 }
