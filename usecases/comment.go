@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"errors"
 	"mini-project-alterra/models"
 	"mini-project-alterra/repositories"
 	"time"
@@ -41,6 +42,10 @@ func (cs *commentUsecase) PostComment(input models.CommentInput) (models.Comment
 	var (
 		comment models.Comment
 	)
+
+	if input.Message == "" {
+		return comment, errors.New("Failed to input comment")
+	}
 
 	photos, err := cs.photoRepository.FindByID(int(input.PhotoID))
 	if err != nil {

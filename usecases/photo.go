@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"errors"
 	"mini-project-alterra/models"
 	"mini-project-alterra/repositories"
 	"time"
@@ -43,6 +44,9 @@ func (ps *photoUsecase) CreatePhoto(input models.PhotoInput) (models.Photo, erro
 		photo models.Photo
 	)
 
+	if input.Caption == "" || input.PhotoURL == "" || input.Title == "" {
+		return photo, errors.New("Error uploading photo")
+	}
 	photo.Title = input.Title
 	photo.Caption = input.Caption
 	photo.PhotoURL = input.PhotoURL

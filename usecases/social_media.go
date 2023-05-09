@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"errors"
 	"mini-project-alterra/models"
 	"mini-project-alterra/repositories"
 )
@@ -89,6 +90,11 @@ func (s *socialMediaUsecase) GetSocialMedias(userId int) ([]models.SocialMedia, 
 // @Security BearerAuth
 func (s *socialMediaUsecase) CreateSocialMedia(userId int, input models.SocialMediaInput) (models.SocialMedia, error) {
 	var socialMedia models.SocialMedia
+
+	if input.Name == "" || input.SocialMediaURL == "" {
+		return socialMedia, errors.New("Failed to create social medias")
+	}
+
 	socialMedia.UserID = userId
 	socialMedia.Name = input.Name
 	socialMedia.SocialMediaURL = input.SocialMediaURL

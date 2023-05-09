@@ -74,17 +74,21 @@ func (s *userUsecase) Register(input models.RegisterInput) (models.User, error) 
 
 	user, _ = s.repository.GetUserByEmail(input.Email)
 	if user.ID > 0 {
-		return user, errors.New("email already used")
+		return user, errors.New("Email already used")
 	}
 
 	user, _ = s.repository.GetUserByUsername(input.Username)
 	if user.ID > 0 {
-		return user, errors.New("username already used")
+		return user, errors.New("Username already used")
 	}
 
 	password, err := helpers.HashPassword(input.Password)
 	if err != nil {
 		return user, err
+	}
+
+	if input.Email == "" || input.Username == "" || input.Password == "" || input.FullName == "" {
+		return user, errors.New("Failed to create user")
 	}
 
 	user.Email = input.Email
@@ -143,12 +147,12 @@ func (s *userUsecase) UpdateUser(userId int, input models.User) (models.User, er
 
 	user, err = s.repository.GetUserByEmail2(userId, input.Email)
 	if user.ID > 0 {
-		return user, errors.New("email already used")
+		return user, errors.New("Email already used")
 	}
 
 	user, err = s.repository.GetUserByUsername2(userId, input.Username)
 	if user.ID > 0 {
-		return user, errors.New("username already used")
+		return user, errors.New("Username already used")
 	}
 
 	user, err = s.repository.GetUserById(userId)
