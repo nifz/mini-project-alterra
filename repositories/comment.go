@@ -42,7 +42,7 @@ func (cr *commentRepository) FindByID(commentID int) (models.Comment, error) {
 func (cr *commentRepository) GetPhotoData(commentID int) (models.Comment, error) {
 	comment, err := cr.FindByID(commentID)
 
-	err = cr.DB.Preload("Photo").Find(&comment).Error
+	err = cr.DB.Preload("Photo").Preload("User").Find(&comment).Error
 
 	return comment, err
 }
@@ -75,7 +75,7 @@ func (cr *commentRepository) DeleteCommentRepository(comment models.Comment) err
 }
 
 func (cr *commentRepository) UpdateComment(comment models.Comment) (models.Comment, error) {
-	err := cr.DB.Session(&gorm.Session{FullSaveAssociations: true}).Preload("User").Preload("Photo").Updates(&comment).Error
+	err := cr.DB.Session(&gorm.Session{FullSaveAssociations: true}).Preload("User").Updates(&comment).Error
 
 	return comment, err
 }
